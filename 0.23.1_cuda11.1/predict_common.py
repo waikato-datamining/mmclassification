@@ -45,8 +45,8 @@ def inference_model(model, img, top_k=None):
             sorted = np.flip(np.argsort(scores, axis=1))
             for k in range(top_k):
                 i = sorted[0][k]
-                result[model.CLASSES[i]] = scores[0][i]
+                result[model.CLASSES[i]] = float(scores[0][i])
         else:
             for i in range(len(scores[0])):
-                result[model.CLASSES[i]] = scores[0][i]
+                result[model.CLASSES[i]] = float(scores[0][i])
     return result
