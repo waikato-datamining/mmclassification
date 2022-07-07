@@ -79,6 +79,57 @@ The following scripts are available:
 
 TODO
 
+
+## Publish images
+
+### Build
+
+```bash
+docker build -t open-mmlab/mmclassification:0.23.1_cuda11.1 .
+```
+
+### Inhouse registry  
+
+* Tag
+
+  ```bash
+  docker tag \
+    mmclassification:0.23.1_cuda11.1 \
+    public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.23.1_cuda11.1
+  ```
+  
+* Push
+
+  ```bash
+  docker push public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.23.1_cuda11.1
+  ```
+  If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
+  
+  ```bash
+  docker login public-push.aml-repo.cms.waikato.ac.nz:443
+  ```
+
+### Docker hub  
+
+* Tag
+
+  ```bash
+  docker tag \
+    mmclassification:0.23.1_cuda11.1 \
+    waikatodatamining/mmclassification:0.23.1_cuda11.1
+  ```
+  
+* Push
+
+  ```bash
+  docker push waikatodatamining/mmclassification:0.23.1_cuda11.1
+  ```
+  If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
+  
+  ```bash
+  docker login
+  ``` 
+
 ## Permissions
 
 When running the docker container as regular use, you will want to set the correct
