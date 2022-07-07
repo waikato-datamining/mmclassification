@@ -33,5 +33,10 @@ RUN pip install --no-cache-dir -v -e . && \
     pip install --no-cache-dir python-image-complete "simple-file-poller>=0.0.9" && \
     pip install --no-cache-dir redis "redis-docker-harness==0.0.1"
 
+ENV PYTHONPATH /mmclassification
 RUN ln -s /usr/bin/python3 /usr/bin/python
 COPY bash.bashrc /etc/bash.bashrc
+COPY mmseg_* /usr/bin/
+COPY predict_common.py /mmclassification/tools
+COPY predict_poll.py /mmclassification/tools
+COPY predict_redis.py /mmclassification/tools
