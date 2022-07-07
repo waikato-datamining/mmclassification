@@ -36,7 +36,7 @@ RUN pip install --no-cache-dir -v -e . && \
 ENV PYTHONPATH /mmclassification
 RUN ln -s /usr/bin/python3 /usr/bin/python
 COPY bash.bashrc /etc/bash.bashrc
-COPY mmseg_* /usr/bin/
+COPY mmcls_* /usr/bin/
 COPY predict_common.py /mmclassification/tools
 COPY predict_poll.py /mmclassification/tools
 COPY predict_redis.py /mmclassification/tools
