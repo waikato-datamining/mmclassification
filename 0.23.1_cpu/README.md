@@ -2,7 +2,7 @@
 
 Allows processing of images with [MMClassification](https://github.com/open-mmlab/mmclassification).
 
-Uses PyTorch 1.9.0 and CUDA 11.1.
+Uses PyTorch 1.9.0 on the CPU.
 
 ## Version
 
@@ -34,7 +34,7 @@ June 16th, 2022
   ```bash
   docker run --gpus=all --shm-size 8G \
     -v /local/dir:/container/dir \
-    -it public.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.23.1_cuda11.1
+    -it public.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.23.1_cpu
   ```
 
   **NB:** For docker versions older than 19.03 (`docker version`), use `--runtime=nvidia` instead of `--gpus=all`.
@@ -50,12 +50,12 @@ June 16th, 2022
 The image is also available from [Docker hub](https://hub.docker.com/u/waikatodatamining):
 
 ```
-waikatodatamining/mmclassification:0.23.1_cuda11.1
+waikatodatamining/mmclassification:0.23.1_cpu
 ```
 
 ### Build local image
 
-* Build the image from Docker file (from within /path_to/mmclassification/0.23.1_cuda11.1)
+* Build the image from Docker file (from within /path_to/mmclassification/0.23.1_cpu)
 
   ```bash
   docker build -t mmcls .
@@ -72,43 +72,12 @@ waikatodatamining/mmclassification:0.23.1_cuda11.1
 
 The following scripts are available:
 
-* `mmcls_config` - for expanding/exporting default configurations (calls `/mmclassification/tools/misc/print_config.py`)
-* `mmcls_train` - for training a model (calls `/mmclassification/mmseg/tools/train.py`)
 * `mmcls_predict_poll` - for applying a model to images (uses file-polling, calls `/mmclassification/tools/predict_poll.py`)
 * `mmcls_predict_redis` - for applying a model to images (via [Redis](https://redis.io/) backend), 
   add `--net=host` to the Docker options (calls `/mmclassification/tools/predict_redis.py`)
 
 
 ### Usage
-
-* The dataset has a simple format, with each sub-folder representing a class.
-  
-* Store class names in an environment variable called `MMCLS_CLASSES` **(inside the container)**:
-
-  ```bash
-  export MMCLS_CLASSES=\'class1\',\'class2\',...
-  ```
-  
-* Alternatively, have the class anmes stored in a text file with the classes separated by commas and the `MMCLS_CLASSES`
-  environment variable point at the file.
-  
-  * The classes are stored in `/data/labels.txt` either as comma-separated list (`class1,class2,...`) or one per line.
-  
-  * Export `MMCLS_CLASSES` as follows:
-
-    ```bash
-    export MMCLS_CLASSES=/data/labels.txt
-    ```
-
-* Use `mmcls_config` to export the config file (of the model you want to train) from `/mmclassification/configs` 
-  (inside the container), then follow [these instructions](#config).
-
-* Train
-
-  ```bash
-  mmcls_train /path_to/your_data_config.py \
-      --work-dir /where/to/save/everything
-  ```
 
 * Predict and output JSON files with the classes and their associated scores
 
@@ -144,7 +113,7 @@ The following scripts are available:
 ### Build
 
 ```bash
-docker build -t open-mmlab/mmclassification:0.23.1_cuda11.1 .
+docker build -t open-mmlab/mmclassification:0.23.1_cpu .
 ```
 
 ### Inhouse registry  
@@ -153,14 +122,14 @@ docker build -t open-mmlab/mmclassification:0.23.1_cuda11.1 .
 
   ```bash
   docker tag \
-    mmclassification:0.23.1_cuda11.1 \
-    public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.23.1_cuda11.1
+    mmclassification:0.23.1_cpu \
+    public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.23.1_cpu
   ```
   
 * Push
 
   ```bash
-  docker push public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.23.1_cuda11.1
+  docker push public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.23.1_cpu
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
@@ -174,14 +143,14 @@ docker build -t open-mmlab/mmclassification:0.23.1_cuda11.1 .
 
   ```bash
   docker tag \
-    mmclassification:0.23.1_cuda11.1 \
-    waikatodatamining/mmclassification:0.23.1_cuda11.1
+    mmclassification:0.23.1_cpu \
+    waikatodatamining/mmclassification:0.23.1_cpu
   ```
   
 * Push
 
   ```bash
-  docker push waikatodatamining/mmclassification:0.23.1_cuda11.1
+  docker push waikatodatamining/mmclassification:0.23.1_cpu
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
