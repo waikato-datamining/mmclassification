@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python /mmclassification/tools/predict_poll.py "$@"
