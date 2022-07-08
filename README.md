@@ -1,5 +1,5 @@
 # mmclassification
-Code and docker images for Open MMLab's Image Classification Toolbox 
+Code and docker images for [Open MMLab's Image Classification Toolbox](https://github.com/open-mmlab/mmclassification).
 
 Available images:
 
