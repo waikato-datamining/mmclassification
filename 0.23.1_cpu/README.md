@@ -158,37 +158,6 @@ docker build -t open-mmlab/mmclassification:0.23.1_cpu .
   docker login
   ``` 
 
-## Example config files
-
-You can output example config files using (stored under `/mmclassification/configs` for the various network types):
-
-```bash
-mmcls_config /path/to/my_config.py
-```
-
-You can browse the config files [here](https://github.com/open-mmlab/mmclassification/tree/v0.23.1/configs).
-
-
-## <a name="config">Preparing the config file</a>
-
-* If necessary, change `num_classes` to number of labels (background not counted).
-* Change `dataset_type` to `ExternalDataset` and any occurrences of `type` in the `train`, `test`, `val` 
-  sections of the `data` dictionary.
-* Change `data_prefix` to the path of your dataset parts (the directory containing `train` and `val` directories).
-* Set `ann_file` occurrences to `None`   
-* Interval in `checkpoint_config` will determine the frequency of saving models while training 
-  (10 for example will save a model after every 10 epochs).
-* In the `runner` property, change `max_epocs` to how many epochs you want to train the model for.
-* Change `load_from` to the file name of the pre-trained network that you downloaded from the model zoo instead
-  of downloading it automatically.
-* If you want to include the validation set, add `, ('val', 1)` to `workflow`.
-
-_You don't have to copy the config file back, just point at it when training._
-
-**NB:** A fully expanded config file will get placed in the output directory with the same
-name as the config plus the extension *.full*.
-
-
 ## Permissions
 
 When running the docker container as regular use, you will want to set the correct
