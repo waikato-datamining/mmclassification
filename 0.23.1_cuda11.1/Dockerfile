@@ -37,6 +37,9 @@ ENV PYTHONPATH /mmclassification
 RUN ln -s /usr/bin/python3 /usr/bin/python
 COPY bash.bashrc /etc/bash.bashrc
 COPY mmcls_* /usr/bin/
+COPY __init__.py /mmclassification/mmcls/datasets
+COPY external.py /mmclassification/mmcls/datasets
 COPY predict_common.py /mmclassification/tools
 COPY predict_poll.py /mmclassification/tools
 COPY predict_redis.py /mmclassification/tools
+COPY train.py /mmclassification/tools
