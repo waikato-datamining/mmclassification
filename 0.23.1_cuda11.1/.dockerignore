@@ -1,5 +1,6 @@
 *.pth
 cache/
+data/
 predictions/
 config/
 output/
