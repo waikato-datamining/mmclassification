@@ -144,7 +144,7 @@ The following scripts are available:
 ### Build
 
 ```bash
-docker build -t open-mmlab/mmclassification:0.23.1_cuda11.1 .
+docker build -t mmclassification:0.23.1_cuda11.1 .
 ```
 
 ### Inhouse registry  

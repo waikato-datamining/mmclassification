@@ -113,7 +113,7 @@ The following scripts are available:
 ### Build
 
 ```bash
-docker build -t open-mmlab/mmclassification:0.23.1_cpu .
+docker build -t mmclassification:0.23.1_cpu .
 ```
 
 ### Inhouse registry  
