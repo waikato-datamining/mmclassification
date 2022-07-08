@@ -82,9 +82,10 @@ def get_samples(root: str, folder_to_idx: Dict[str, int],
 
 @DATASETS.register_module()
 class ExternalDataset(BaseDataset):
-    """External dataset for classification.
+    """External dataset for classification (based on custom.CustomDataset class).
 
-    The dataset supports two kinds of annotation format.
+    The dataset supports the following kinds of annotation format,
+    however the second is the preferred one.
 
     1. An annotation file is provided, and each line indicates a sample:
 
