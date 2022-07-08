@@ -202,7 +202,7 @@ class ExternalDataset(BaseDataset):
 
     def load_class_labels(self):
         """
-        Gets the class labels from the environment variable MMSEG_CLASSES.
+        Gets the class labels from the environment variable MMCLS_CLASSES.
         Either comma-separated string of class labels or points to a file.
         If file, either contains single line with comma-separated list of class labels or one label per line.
 
@@ -211,7 +211,7 @@ class ExternalDataset(BaseDataset):
         """
         mmseg_classes = os.getenv(MMCLS_CLASSES)
         if mmseg_classes == None:
-            raise Exception("%s environment variable containing/pointing to class labels not defined!" % MMSEG_CLASSES)
+            raise Exception("%s environment variable containing/pointing to class labels not defined!" % MMCLS_CLASSES)
         # points to file?
         if os.path.exists(mmseg_classes):
             with open(mmseg_classes, "r") as fp:
