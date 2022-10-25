@@ -228,6 +228,7 @@ class ExternalDataset(BaseDataset):
                             result.append(line)
         else:
             result = mmseg_classes.split(",")
+        result.sort()
         return result
 
     def load_annotations(self):
