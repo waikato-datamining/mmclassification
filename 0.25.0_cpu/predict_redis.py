@@ -45,13 +45,12 @@ if __name__ == '__main__':
     parser = create_parser('MMClassification - Prediction (Redis)', prog="mmcls_predict_redis", prefix="redis_")
     parser.add_argument('--model', help='Path to the trained model checkpoint', required=True, default=None)
     parser.add_argument('--config', help='Path to the config file', required=True, default=None)
-    parser.add_argument('--device', help='The CUDA device to use', default="cuda:0")
     parser.add_argument('--top_x', metavar='INT', type=int, default=None, help='The top X labels to return, use <=0 for all')
     parser.add_argument('--verbose', action='store_true', help='Whether to output more logging info', required=False, default=False)
     parsed = parser.parse_args()
 
     try:
-        model = init_segmentor(parsed.config, parsed.model, device=parsed.device)
+        model = init_segmentor(parsed.config, parsed.model, device="cpu")
 
         config = Container()
         config.model = model

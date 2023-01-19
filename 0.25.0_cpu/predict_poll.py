@@ -111,7 +111,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="MMClassification - Prediction", prog="mmcls_predict_poll")
     parser.add_argument('--model', help='Path to the trained model checkpoint', required=True, default=None)
     parser.add_argument('--config', help='Path to the config file', required=True, default=None)
-    parser.add_argument('--device', help='The CUDA device to use', default="cuda:0")
     parser.add_argument('--top_x', metavar='INT', type=int, default=None, help='The top X labels to return, use <=0 for all')
     parser.add_argument('--prediction_in', help='Path to the test images', required=True, default=None)
     parser.add_argument('--prediction_out', help='Path to the output csv files folder', required=True, default=None)
@@ -126,7 +125,7 @@ if __name__ == '__main__':
     parsed = parser.parse_args()
 
     try:
-        model = init_model(parsed.config, parsed.model, device=parsed.device)
+        model = init_model(parsed.config, parsed.model, device="cpu")
 
         # Performing the prediction and producing the csv files
         predict_on_images(parsed.prediction_in, model, parsed.prediction_out, parsed.prediction_tmp,
