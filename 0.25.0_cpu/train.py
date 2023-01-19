@@ -69,6 +69,11 @@ def main():
     if args.cfg_options is not None:
         cfg.merge_from_dict(args.cfg_options)
 
+    # dummy values
+    args.gpus = None
+    args.gpu_ids = None
+    args.ipu_replicas = None
+
     # set multi-process settings
     setup_multi_processes(cfg)
 
