@@ -71,6 +71,7 @@ def main():
 
     # dummy values
     args.gpus = None
+    args.gpu_id = 0
     args.gpu_ids = None
     args.ipu_replicas = None
 
