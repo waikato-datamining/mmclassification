@@ -70,7 +70,7 @@ def main():
         cfg.merge_from_dict(args.cfg_options)
 
     # dummy GPU options
-    cfg.gpu_ids = None
+    cfg.gpu_ids = []
     cfg.ipu_replicas = None
 
     # set multi-process settings
