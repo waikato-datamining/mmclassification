@@ -71,10 +71,11 @@ waikatodatamining/mmclassification:0.25.0_cpu
 The following scripts are available:
 
 * `mmcls_config` - for expanding/exporting default configurations (calls `/mmclassification/tools/misc/print_config.py`)
-* `mmcls_train` - for training a model (calls `/mmclassification/mmseg/tools/train.py`)
+* `mmcls_train` - for training a model (calls `/mmclassification/tools/train.py`)
 * `mmcls_predict_poll` - for applying a model to images (uses file-polling, calls `/mmclassification/tools/predict_poll.py`)
 * `mmcls_predict_redis` - for applying a model to images (via [Redis](https://redis.io/) backend), 
   add `--net=host` to the Docker options (calls `/mmclassification/tools/predict_redis.py`)
+* `mmcls_onnx` - for exporting a pytorch model to ONNX (calls `/mmclassification/tools/deployment/pytorch2onnx.py`)
 
 
 ### Usage
