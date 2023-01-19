@@ -3,4 +3,5 @@
 # Documentation of tools/print_config.py
 # https://mmclassification.readthedocs.io/en/latest/tools/miscellaneous.html#print-the-entire-config
 
+export CUDA_VISIBLE_DEVICES=-1
 python /mmclassification/tools/misc/print_config.py "$@"
