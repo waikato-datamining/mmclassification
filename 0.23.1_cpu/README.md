@@ -19,9 +19,9 @@ and timestamp:
 June 16th, 2022
 ```
 
-## Docker
+## Quick start
 
-### Quick start
+### Inhouse registry
 
 * Log into registry using *public* credentials:
 
@@ -39,11 +39,13 @@ June 16th, 2022
 
 ### Docker hub
 
-The image is also available from [Docker hub](https://hub.docker.com/u/waikatodatamining):
+* Pull and run image (adjust volume mappings `-v`):
 
-```
-waikatodatamining/mmclassification:0.23.1_cpu
-```
+  ```bash
+  docker run --gpus=all --shm-size 8G \
+    -v /local/dir:/container/dir \
+    -it waikatodatamining/mmclassification:0.23.1_cpu
+  ```
 
 ### Build local image
 
@@ -59,47 +61,6 @@ waikatodatamining/mmclassification:0.23.1_cpu
   docker run --gpus=all --shm-size 8G -v /local/dir:/container/dir -it mmcls
   ```
   `/local/dir:/container/dir` maps a local disk directory into a directory inside the container
-
-### Scripts
-
-The following scripts are available:
-
-* `mmcls_config` - for expanding/exporting default configurations (calls `/mmclassification/tools/misc/print_config.py`)
-* `mmcls_predict_poll` - for applying a model to images (uses file-polling, calls `/mmclassification/tools/predict_poll.py`)
-* `mmcls_predict_redis` - for applying a model to images (via [Redis](https://redis.io/) backend), 
-  add `--net=host` to the Docker options (calls `/mmclassification/tools/predict_redis.py`)
-
-
-### Usage
-
-* Predict and output JSON files with the classes and their associated scores
-
-  ```bash
-  mmcls_predict_poll \
-      --model /path_to/epoch_n.pth \
-      --config /path_to/your_data_config.py \
-      --prediction_in /path_to/test_imgs \
-      --prediction_out /path_to/test_results
-  ```
-  Run with `-h` for all available options.
-
-* Predict via Redis backend
-
-  You need to start the docker container with the `--net=host` option if you are using the host's Redis server.
-
-  The following command listens for images coming through on channel `images` and broadcasts
-  predicted images on channel `predictions`:
-
-  ```bash
-  mmcls_predict_redis \
-      --model /path_to/epoch_n.pth \
-      --config /path_to/your_data_config.py \
-      --redis_in images \
-      --redis_out predictions
-  ```
-  
-  Run with `-h` for all available options.
-
 
 ## Publish images
 
@@ -150,6 +111,47 @@ docker build -t mmclassification:0.23.1_cpu .
   ```bash
   docker login
   ``` 
+
+## Scripts
+
+The following scripts are available:
+
+* `mmcls_config` - for expanding/exporting default configurations (calls `/mmclassification/tools/misc/print_config.py`)
+* `mmcls_predict_poll` - for applying a model to images (uses file-polling, calls `/mmclassification/tools/predict_poll.py`)
+* `mmcls_predict_redis` - for applying a model to images (via [Redis](https://redis.io/) backend), 
+  add `--net=host` to the Docker options (calls `/mmclassification/tools/predict_redis.py`)
+
+
+## Usage
+
+* Predict and output JSON files with the classes and their associated scores
+
+  ```bash
+  mmcls_predict_poll \
+      --model /path_to/epoch_n.pth \
+      --config /path_to/your_data_config.py \
+      --prediction_in /path_to/test_imgs \
+      --prediction_out /path_to/test_results
+  ```
+  Run with `-h` for all available options.
+
+* Predict via Redis backend
+
+  You need to start the docker container with the `--net=host` option if you are using the host's Redis server.
+
+  The following command listens for images coming through on channel `images` and broadcasts
+  predicted images on channel `predictions`:
+
+  ```bash
+  mmcls_predict_redis \
+      --model /path_to/epoch_n.pth \
+      --config /path_to/your_data_config.py \
+      --redis_in images \
+      --redis_out predictions
+  ```
+  
+  Run with `-h` for all available options.
+
 
 ## Example config files
 

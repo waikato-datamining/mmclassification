@@ -19,9 +19,9 @@ and timestamp:
 December 6th, 2022
 ```
 
-## Docker
+## Quick start
 
-### Quick start
+### Inhouse registry
 
 * Log into registry using *public* credentials:
 
@@ -39,11 +39,13 @@ December 6th, 2022
 
 ### Docker hub
 
-The image is also available from [Docker hub](https://hub.docker.com/u/waikatodatamining):
+* Pull and run image (adjust volume mappings `-v`):
 
-```
-waikatodatamining/mmclassification:0.25.0_cpu
-```
+  ```bash
+  docker run --shm-size 8G \
+    -v /local/dir:/container/dir \
+    -it waikatodatamining/mmclassification:0.25.0_cpu
+  ```
 
 ### Build local image
 
@@ -60,7 +62,57 @@ waikatodatamining/mmclassification:0.25.0_cpu
   ```
   `/local/dir:/container/dir` maps a local disk directory into a directory inside the container
 
-### Scripts
+## Publish images
+
+### Build
+
+```bash
+docker build -t mmclassification:0.25.0_cpu .
+```
+
+### Inhouse registry  
+
+* Tag
+
+  ```bash
+  docker tag \
+    mmclassification:0.25.0_cpu \
+    public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.25.0_cpu
+  ```
+  
+* Push
+
+  ```bash
+  docker push public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.25.0_cpu
+  ```
+  If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
+  
+  ```bash
+  docker login public-push.aml-repo.cms.waikato.ac.nz:443
+  ```
+
+### Docker hub  
+
+* Tag
+
+  ```bash
+  docker tag \
+    mmclassification:0.25.0_cpu \
+    waikatodatamining/mmclassification:0.25.0_cpu
+  ```
+  
+* Push
+
+  ```bash
+  docker push waikatodatamining/mmclassification:0.25.0_cpu
+  ```
+  If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
+  
+  ```bash
+  docker login
+  ``` 
+
+## Scripts
 
 The following scripts are available:
 
@@ -72,7 +124,7 @@ The following scripts are available:
 * `mmcls_onnx` - for exporting a pytorch model to ONNX (calls `/mmclassification/tools/deployment/pytorch2onnx.py`)
 
 
-### Usage
+## Usage
 
 * The dataset has a simple format, with each sub-folder representing a class.
   
@@ -131,56 +183,6 @@ The following scripts are available:
   
   Run with `-h` for all available options.
 
-
-## Publish images
-
-### Build
-
-```bash
-docker build -t mmclassification:0.25.0_cpu .
-```
-
-### Inhouse registry  
-
-* Tag
-
-  ```bash
-  docker tag \
-    mmclassification:0.25.0_cpu \
-    public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.25.0_cpu
-  ```
-  
-* Push
-
-  ```bash
-  docker push public-push.aml-repo.cms.waikato.ac.nz:443/open-mmlab/mmclassification:0.25.0_cpu
-  ```
-  If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
-  
-  ```bash
-  docker login public-push.aml-repo.cms.waikato.ac.nz:443
-  ```
-
-### Docker hub  
-
-* Tag
-
-  ```bash
-  docker tag \
-    mmclassification:0.25.0_cpu \
-    waikatodatamining/mmclassification:0.25.0_cpu
-  ```
-  
-* Push
-
-  ```bash
-  docker push waikatodatamining/mmclassification:0.25.0_cpu
-  ```
-  If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
-  
-  ```bash
-  docker login
-  ``` 
 
 ## Example config files
 
