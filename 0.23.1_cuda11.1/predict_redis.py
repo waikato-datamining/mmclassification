@@ -4,7 +4,7 @@ import numpy as np
 import traceback
 import cv2
 
-from mmseg.apis import inference_segmentor, init_segmentor
+from mmcls.apis import init_model
 from rdh import Container, MessageContainer, create_parser, configure_redis, run_harness, log
 from tools.predict_common import inference_model
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     parsed = parser.parse_args()
 
     try:
-        model = init_segmentor(parsed.config, parsed.model, device=parsed.device)
+        model = init_model(parsed.config, parsed.model, device=parsed.device)
 
         config = Container()
         config.model = model
